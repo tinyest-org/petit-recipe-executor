@@ -1,0 +1,75 @@
+name: Test Kiwi Forma connection and page loading
+kind: test.availability
+
+trigger:
+  # to trigger it every 5 minutes
+  every: 5m
+  webhook:
+    # requires auth to access it
+    name: KF
+
+# overide with real values for prod and don't commit these values to git
+args: 
+  - username
+  - password
+  - pageToLoad
+  - wordToFind
+  
+env:
+  url: https://formation.beta.junior-entreprises.com/api
+
+
+# define function to get reused
+# define:
+#   - name: login
+#     function: post
+#     with:
+#       url: "{url}/security/token" # example
+#       input: form # ou json 
+#       output: json
+#       data:
+#         username: "#username"
+#         password: "#password"
+#         type: password
+#     returns: tokens
+
+steps:
+  - name: login
+    function: post
+    with:
+      url: "{url}/security/token" # example
+      input: form # ou json 
+      output: json
+      data: 
+        type: password
+        username: $username
+        password: $password
+    returns: tokens
+    
+  - name: pickBearer
+    requires: 
+      - login
+    function: pick
+    with:
+      input: $tokens
+      key: access_token
+    returns: bearer 
+  
+  - name: fetch profile page
+    function: get
+    requires:
+      - pickBearer
+    with:
+      output: text
+      url: "{url}/page/{pageToLoad}" # example
+      headers:
+        authorization: "Bearer {bearer}"
+    returns: data
+    test:
+      function: contains
+      with:
+        input: $data
+        inside: "{wordToFind}"
+
+
+
