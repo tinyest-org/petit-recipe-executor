@@ -19,8 +19,8 @@ recipe = load_recipe(content)
 e = Executor()
 
 args = {
-    "username": "pleveau@juniorisep.com",
-    "password": "apcg461M",
+    "username": "<>",
+    "password": "<>",
     "pageToLoad": 36,
     "wordToFind": "Formation",
 }
