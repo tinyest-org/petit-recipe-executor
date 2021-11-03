@@ -1,2 +1,1 @@
-from .executor import Executor
-from .utils import load_recipe
+from .executor import Executor, load_recipe

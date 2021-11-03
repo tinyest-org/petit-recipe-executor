@@ -37,11 +37,9 @@ class Recipe(BaseModel):
     kind: str
     # should create class for later
     trigger: dict
-    args: List[str]
     steps: List[Step]
+    args: List[str] = []
     env: Dict[str, Any] = {}
-
-
 
 @dataclass
 class Result:
