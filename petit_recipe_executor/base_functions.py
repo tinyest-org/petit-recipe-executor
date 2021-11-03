@@ -1,6 +1,6 @@
-from typing import Optional, Any
-import requests
+from typing import Any, Optional
 
+import requests
 
 # output can be
 # json | text | none | response

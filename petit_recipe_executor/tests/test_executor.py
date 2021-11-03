@@ -1,7 +1,8 @@
 import unittest
-from .. import executor
-from .. import utils
+
 import yaml
+
+from .. import executor, utils
 
 data = """
 name: check site alive

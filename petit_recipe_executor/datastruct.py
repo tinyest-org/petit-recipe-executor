@@ -1,7 +1,9 @@
 from __future__ import annotations
-from pydantic import BaseModel
+
 from dataclasses import dataclass
-from typing import Any, List, Dict, Optional
+from typing import Any, Dict, List, Optional
+
+from pydantic import BaseModel
 
 VARIABLE_TOKEN = "$"
 

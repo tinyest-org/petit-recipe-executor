@@ -1,14 +1,12 @@
 import logging
 import time
-from typing import Optional, List
+from typing import List, Optional
 
+from .base_functions import functions
 from .context import Context
 from .datastruct import VARIABLE_TOKEN, Recipe, Result, Step, Test
-from .base_functions import functions
-
 
 # TODO: move to async to handle more load
-# TODO: move to pydantic to validate and load the struct
 # TODO: implem dependency detection
 
 
