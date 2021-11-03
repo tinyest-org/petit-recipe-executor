@@ -4,7 +4,7 @@ import sys
 
 import yaml
 
-from petit_monitor import Executor, load_recipe
+from petit_recipe_executor import Executor, load_recipe
 
 # logging.basicConfig(level=logging.DEBUG)
 
@@ -25,7 +25,7 @@ args = {
     "wordToFind": "Formation",
 }
 
-e.add_env(args)
+e.bind_args(args)
 
 result = e.execute_recipe(recipe)
 
