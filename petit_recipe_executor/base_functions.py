@@ -2,6 +2,9 @@ from typing import Optional, Any
 import requests
 
 
+# output can be
+# json | text | none | response
+
 def _request(
     method: str,
     url: str,
@@ -85,6 +88,10 @@ def put(
 
 
 def _handle_res(resp: requests.Response, output):
+    if output == "response":
+        return resp
+    elif output == "none":
+        return None
     if resp.ok:
         if output == "json":
             return resp.json()
@@ -116,8 +123,14 @@ def contains(input: str, inside: str) -> bool:
 
 
 def pick(input: dict, key: str) -> Any:
-    return input[key]
+    return input.__getattribute__(key)
 
+
+def equal(a: Any, b: Any):
+    return a == b
+
+def not_equal(a: Any, b: Any):
+    return a != b
 
 functions = {
     "http.get": get,
@@ -131,4 +144,6 @@ functions = {
     # basic utils
     "pick": pick,
     "contains": contains,
+    "equal": equal,
+    "not_equal": not_equal,
 }

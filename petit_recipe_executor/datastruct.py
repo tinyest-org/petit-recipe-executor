@@ -22,7 +22,7 @@ class Step(BaseModel):
     function: str
     with_: FunctionParams
     returns: Optional[str]
-    test: Optional[Test]
+    tests: Optional[List[Test]]
 
 
     class Config:

@@ -1,0 +1,34 @@
+name: check site alive
+kind: test.availability
+
+trigger:
+  every: 5m
+
+args: []
+
+steps:
+
+  - name: test post
+    function: http.post
+    with:
+      url: https://example.com
+      output: text
+
+
+  - name: test put
+    function: http.put
+    with:
+      url: https://example.com
+      output: text
+  
+  - name: test patch
+    function: http.patch
+    with:
+      url: https://example.com
+      output: text
+
+  - name: test delete
+    function: http.delete
+    with:
+      url: https://example.com
+      output: text

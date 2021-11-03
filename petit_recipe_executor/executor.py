@@ -3,7 +3,7 @@ import time
 from typing import Optional, List
 
 from .context import Context
-from .datastruct import VARIABLE_TOKEN, Recipe, Result, Step
+from .datastruct import VARIABLE_TOKEN, Recipe, Result, Step, Test
 from .base_functions import functions
 
 
@@ -33,13 +33,11 @@ class Executor:
                 res[k] = v
         return res
 
-    def _do_test(self, step: Step) -> bool:
+    def _do_test(self, step: Step, test: Test) -> bool:
         result = False
         try :
-            test = step.test
             func = functions[test.function]
             args = self._prepare_args(test.with_)
-
             result = func(**args)
         except:
             # TODO: log
@@ -63,8 +61,10 @@ class Executor:
             self.context.put(step.returns, result)
 
         test_passed = True
-        if step.test is not None:
-            test_passed = self._do_test(step)
+        if step.tests is not None:
+            for test in step.tests:
+                test_passed = self._do_test(step, test)
+        
         end = time.time()
         return Result(
             name=step.name,

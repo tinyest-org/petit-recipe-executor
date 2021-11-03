@@ -3,6 +3,7 @@ kind: test.availability
 
 trigger:
   # to trigger it every 5 minutes
+  at: Isodate forma
   every: 5m
   webhook:
     # requires auth to access it
@@ -65,11 +66,11 @@ steps:
       headers:
         authorization: "Bearer {bearer}"
     returns: data
-    test:
-      function: contains
-      with:
-        input: $data
-        inside: "{wordToFind}"
+    tests:
+      - function: contains
+        with:
+          input: $data
+          inside: "{wordToFind}"
 
 
 
