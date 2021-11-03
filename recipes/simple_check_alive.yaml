@@ -1,0 +1,13 @@
+name: check site alive
+kind: test.availability
+
+trigger:
+  every: 5m
+
+args: []
+
+steps:
+  - name: http ping
+    function: http.ping_get
+    with:
+      url: https://google.com

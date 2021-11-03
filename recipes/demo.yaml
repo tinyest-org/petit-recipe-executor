@@ -35,7 +35,7 @@ env:
 
 steps:
   - name: login
-    function: post
+    function: http.post
     with:
       url: "{url}/security/token" # example
       input: form # ou json 
@@ -56,7 +56,7 @@ steps:
     returns: bearer 
   
   - name: fetch profile page
-    function: get
+    function: http.get
     requires:
       - pickBearer
     with:

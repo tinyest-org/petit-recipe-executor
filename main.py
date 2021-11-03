@@ -1,10 +1,12 @@
 import json
-import yaml
 import logging
-from recipe_executor import Executor
 import sys
 
-logging.basicConfig(level=logging.DEBUG)
+import yaml
+
+from petit_monitor import Executor, load_recipe
+
+# logging.basicConfig(level=logging.DEBUG)
 
 
 filename = sys.argv[1]
@@ -12,18 +14,20 @@ filename = sys.argv[1]
 with open(filename, 'r') as f :
     content = yaml.safe_load(f.read())
 
+recipe = load_recipe(content)
+
 e = Executor()
 
 args = {
-    "username": "<>",
-    "password":"<>",
+    "username": "pleveau@juniorisep.com",
+    "password": "apcg461M",
     "pageToLoad": 36,
-    "wordToFind": "Formation"
+    "wordToFind": "Formation",
 }
 
 e.add_env(args)
 
-result = e.execute_recipe(content)
+result = e.execute_recipe(recipe)
 
 
 print(result)
