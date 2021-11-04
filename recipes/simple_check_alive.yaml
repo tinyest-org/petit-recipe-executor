@@ -11,19 +11,3 @@ steps:
     function: http.ping_get
     with:
       url: https://google.com
-
-  - name: test post
-    function: http.post
-    with:
-      url: https://example.com
-
-
-  - name: test post
-    function: http.post
-    with:
-      url: https://example.com
-  
-  - name: test post
-    function: http.post
-    with:
-      url: https://example.com
